@@ -20,10 +20,10 @@ export class HomeComponent implements OnInit {
   validSelection: boolean;
   message: string;
 
-  static selectedRoles: any;
-  static userEmail: string;
-  static validSelection: boolean;
-  static msgShow: boolean;
+  // static selectedRoles: any;
+  // static cookieEmail: string;
+  // static validSelection: boolean;
+  // static msgShow: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,12 +31,12 @@ export class HomeComponent implements OnInit {
     private cookieService: CookieService
   ) {
     this.form = this.formBuilder.group({
-      role: new FormArray([])
+      roles: new FormArray([])
     });
   }
 
   ngOnInit() {
-    this.userEmail = this.cookieService.get("userEmail");
+    this.userEmail = this.cookieService.get(" cookieEmail");
 
     this.service.getRole().subscribe(
       result => {
@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
   submit() {
     if (
       this.selectedRoles.length > 0 &&
-      this.cookieService.check("userEmail")
+      this.cookieService.check(" cookieEmail")
     ) {
       let request: RoleRequest = {
         awsArns: this.selectedRoles,

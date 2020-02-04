@@ -3,19 +3,24 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Role } from "./role";
 import { RoleRequest } from "./role-request";
+import { CookieService } from "ngx-cookie-service";
 
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
   })
 };
-
+// const permissionsURL = "";
 @Injectable({
   providedIn: "root"
 })
 export class ApplicationService {
-  private permissionServiceURL = "process.env.PERMISSIONS";
-  constructor(private httpClient: HttpClient) {}
+  // this.permissionsURL = this.cookieService.get(" BACKEND_URL");
+  private permissionServiceURL = this.cookieService.get(" BACKEND_URL");
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   getRole(): Observable<Role[]> {
     return this.httpClient.get<Role[]>(this.permissionServiceURL + "role");
